@@ -1,5 +1,5 @@
 import type { EmailValidator } from '../protocols/email-validator'
-import { MissingParamError } from '../errors/missing-params'
+import { MissingParamError } from '../errors/missing-params-error'
 import { SignUpController } from './signup'
 
 const makeEmailValidator = (): EmailValidator => {
