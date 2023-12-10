@@ -4,7 +4,7 @@ import { SignUpController } from './signup'
 import { badRequest, serverError } from '../helpers/http-helper'
 import { InvalidParamError } from '../errors/invalid-params-error'
 
-const makeEmailValidator = (): EmailValidator => {
+const makeEmailValidatorStub = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {
     validate (email: string): boolean {
       return true
@@ -20,7 +20,7 @@ interface SutTypes {
 }
 
 const makeSut = (): SutTypes => {
-  const emailValidatorStub = makeEmailValidator()
+  const emailValidatorStub = makeEmailValidatorStub()
   const sut = new SignUpController(emailValidatorStub)
   return {
     sut,
