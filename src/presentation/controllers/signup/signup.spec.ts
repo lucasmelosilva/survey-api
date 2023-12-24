@@ -160,7 +160,7 @@ describe('SignUp Controller', () => {
       }
     }
     const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(serverError())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 
   it('should call AddAccount with correct values', async () => {
@@ -213,6 +213,6 @@ describe('SignUp Controller', () => {
       }
     }
     const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(serverError())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
