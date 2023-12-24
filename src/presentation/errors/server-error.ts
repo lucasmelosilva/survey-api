@@ -4,5 +4,6 @@ export class ServerError extends Error {
   ) {
     super('Server error')
     super.name = 'ServerError'
+    super.message = 'Internal server error'
   }
 }
