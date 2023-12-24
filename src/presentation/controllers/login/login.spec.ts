@@ -1,7 +1,7 @@
 import type { HttpRequest } from '../../protocols'
 import type { EmailValidator } from '../../protocols/email-validator'
 import { InvalidParamError, MissingParamError } from '../../errors'
-import { badRequest } from '../../helpers/http-helper'
+import { badRequest, serverError } from '../../helpers/http-helper'
 import { LoginController } from './login'
 
 const makeEmailValidatorStub = (): EmailValidator => {
@@ -66,5 +66,12 @@ describe('Login Controller', () => {
     jest.spyOn(emailValidatorStub, 'validate').mockReturnValueOnce(false)
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(badRequest(new InvalidParamError('email')))
+  })
+
+  it('should return 500 if EmailValidator throws', async () => {
+    const { sut, emailValidatorStub } = makeSut()
+    jest.spyOn(emailValidatorStub, 'validate').mockImplementationOnce(() => { throw new Error() })
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
