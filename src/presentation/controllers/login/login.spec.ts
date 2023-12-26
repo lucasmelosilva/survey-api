@@ -1,4 +1,4 @@
-import type { EmailValidator, HttpRequest, Authentication, Validation } from './login-protocols'
+import type { HttpRequest, Authentication, Validation } from './login-protocols'
 import { MissingParamError } from '../../errors'
 import { badRequest, ok, serverError, unauthorized } from '../../helpers/http-helper'
 import { LoginController } from './login'
@@ -11,15 +11,6 @@ const makeAuthenticationStub = (): Authentication => {
   }
 
   return new AuthenticationStub()
-}
-
-const makeEmailValidatorStub = (): EmailValidator => {
-  class EmailValidatorStub implements EmailValidator {
-    validate (email: string): boolean {
-      return true
-    }
-  }
-  return new EmailValidatorStub()
 }
 
 const makeValidationStub = (): Validation => {
@@ -40,19 +31,16 @@ const makeFakeRequest = (): HttpRequest => ({
 interface SutTypes {
   sut: LoginController
   validationStub: Validation
-  emailValidatorStub: EmailValidator
   authenticationStub: Authentication
 }
 
 const makeSut = (): SutTypes => {
-  const emailValidatorStub = makeEmailValidatorStub()
   const validationStub = makeValidationStub()
   const authenticationStub = makeAuthenticationStub()
-  const sut = new LoginController(emailValidatorStub, validationStub, authenticationStub)
+  const sut = new LoginController(validationStub, authenticationStub)
   return {
     sut,
     validationStub,
-    emailValidatorStub,
     authenticationStub
   }
 }
