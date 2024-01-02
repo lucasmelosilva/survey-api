@@ -34,7 +34,7 @@ const makeHashCompareStub = (): HashComparer => {
 
 const makeUpdateAccessTokenRepositoryStub = (): UpdateAccessTokenRepository => {
   class UpdateAccessTokenRepositoryStub implements UpdateAccessTokenRepository {
-    async update (updateModel: UpdateModel): Promise<void> {
+    async updateAccessToken (updateModel: UpdateModel): Promise<void> {
       return await new Promise(resolve => resolve())
     }
   }
@@ -138,7 +138,7 @@ describe('DbAuthentication UseCase', () => {
 
   it('should call UpdateAccessTokenRepository with correct values', async () => {
     const { sut, updateAccessTokenRepositoryStub } = makeSut()
-    const updateSpy = jest.spyOn(updateAccessTokenRepositoryStub, 'update')
+    const updateSpy = jest.spyOn(updateAccessTokenRepositoryStub, 'updateAccessToken')
     await sut.auth(makeFakeAuthentication())
     expect(updateSpy).toHaveBeenCalledWith({ id: 'valid_id', accessToken: 'any_token' })
   })

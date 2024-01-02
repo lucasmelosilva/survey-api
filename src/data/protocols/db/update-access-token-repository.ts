@@ -4,5 +4,5 @@ export interface UpdateModel {
 }
 
 export interface UpdateAccessTokenRepository {
-  update: (updateMode: UpdateModel) => Promise<void>
+  updateAccessToken: (updateMode: UpdateModel) => Promise<void>
 }
