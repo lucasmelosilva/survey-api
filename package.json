@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc",
-    "dev": "sucrase-node src/main/server.ts",
+    "up": "npm run build && docker compose up",
+    "down": "docker compose down",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
@@ -19,7 +20,7 @@
   "author": "Lucas de Melo",
   "license": "ISC",
   "engines": {
-    "node": "18.17.x"
+    "node": "18"
   },
   "devDependencies": {
     "@shelf/jest-mongodb": "^4.2.0",
