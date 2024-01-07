@@ -1,7 +1,7 @@
 {
   "name": "survey-api",
   "version": "1.1.0",
-  "description": "",
+  "description": "Survey service api",
   "main": "index.js",
   "scripts": {
     "start": "node dist/main/server.js",
@@ -16,8 +16,11 @@
     "prepare": "husky install"
   },
   "keywords": [],
-  "author": "",
+  "author": "Lucas de Melo",
   "license": "ISC",
+  "engines": {
+    "node": "18.17.x"
+  },
   "devDependencies": {
     "@shelf/jest-mongodb": "^4.2.0",
     "@types/bcrypt": "^5.0.2",
